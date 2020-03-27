@@ -13,16 +13,32 @@ export default function Incidents() {
     const navigation = useNavigation();
     const [incidents, setIncidents] = useState([]);
     const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1); //listagem de casos iniciando da página 1
+    const [loading, setLoading] = useState(false); //armazenar a informação na busca de novos dados para evitar que esses dados sejam carregados novamente, carregando uma página por vez
 
-    function navigateToDetails() {
-        navigation.navigate('Details');
+    function navigateToDetails(incident) {
+        navigation.navigate('Details', { incident });
     }
 
     async function loadIncidents() {
-        const response = await api.get('incidents');
+        if(loading) {
+            return; //para evitar que enquanto outra requisição estiver sendo feita, que mais uma requisição aconteça
+        }
 
-        setIncidents(response.data);
+        if(total > 0 && incidents.length === total) {
+            return; //para caso tenha carregado todos os casos, não ter necessidade de carregar novamente
+        }
+
+        setLoading(true);
+
+        const response = await api.get('incidents', {
+            params: { page } //atualiza a paginação (?page=2)
+        });
+
+        setIncidents([...incidents, ...response.data]); //os dados são exibidos assim para que, em vez de ocorrer a troca de página, ocorra a rolagem infinita
         setTotal(response.headers['x-total-count']); //header criada no backend para contabilizar o total de caso
+        setPage(page + 1); //ocorre a paginação
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -42,10 +58,12 @@ export default function Incidents() {
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia.</Text>
 
             <FlatList
-                style={styles.incidentList}
                 data={incidents}
+                style={styles.incidentList}
                 keyExtractor={ incident => String(incident.id) }
                 showsVerticalScrollIndicator={false}
+                onEndReached={loadIncidents}
+                onEndReachedThreshold={0.2} //se ele estiver a 20% do final da lista, mais itens são carregados
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
                         <Text style={styles.incidentProperty}>ONG:</Text>
@@ -64,7 +82,7 @@ export default function Incidents() {
 
                         <TouchableOpacity 
                         style={styles.detailsButton} 
-                        onPress={navigateToDetails}
+                        onPress={() => navigateToDetails(incident)}
                         >
                             <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
                             <Feather name="arrow-right" size={16} color="#E02041" />
