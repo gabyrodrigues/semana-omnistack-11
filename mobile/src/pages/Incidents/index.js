@@ -21,11 +21,11 @@ export default function Incidents() {
     }
 
     async function loadIncidents() {
-        if(loading) {
+        if (loading) {
             return; //para evitar que enquanto outra requisição estiver sendo feita, que mais uma requisição aconteça
         }
 
-        if(total > 0 && incidents.length === total) {
+        if (total > 0 && incidents.length === total) {
             return; //para caso tenha carregado todos os casos, não ter necessidade de carregar novamente
         }
 
