@@ -58,15 +58,28 @@
     position: relative;
 }
 
-.profile-container ul li button {
+.profile-container ul li button,
+.profile-container ul li .button-edit {
     position: absolute;
-    right: 24px;
     top: 24px;
     border: 0;
     background-color: transparent;
 }
 
-.profile-container ul li button:hover {
+.profile-container ul li button {
+    right: 24px;
+}
+
+.profile-container ul li .button-edit {
+    position: absolute;
+    right: 64px;
+    top: 24px;
+    border: 0;
+    background-color: transparent;
+}
+
+.profile-container ul li button:hover,
+.profile-container ul li .button-edit:hover {
     opacity: 0.8;
 }
 
