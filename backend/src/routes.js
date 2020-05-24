@@ -46,5 +46,14 @@ routes.delete('/incidents/:id', celebrate({
         id: Joi.number().required()
     })
 }), IncidentController.delete);
+//editar casos
+routes.put('/incidents/:id', celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required()
+    })
+}), IncidentController.update);
+
+//procurar caso
+routes.get('/incidents/:id', IncidentController.search);
 
 module.exports = routes;
