@@ -1,5 +1,5 @@
 <h3 align="center" >
-  Be the Hero is an application where you can help people by donating for the registered NGOs causes.
+  Be the Hero is an application where you can help people by donating to the registered causes of NGOs
 </h3>
 
 <p align="center">
