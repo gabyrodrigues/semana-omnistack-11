@@ -26,14 +26,19 @@ module.exports = {
         const { title, description, value } = request.body;
         const ong_id = request.headers.authorization;
 
-        const [id] = await connection('incidents').insert({
-            title,
-            description,
-            value,
-            ong_id
-        });
+        
+        try {
+            const [id] = await connection('incidents').insert({
+                title,
+                description,
+                value,
+                ong_id
+            });
 
-        return response.json({ id });
+            return response.json({ id });
+        } catch (error) {
+            response.status(500).json({ error: error });
+        }
     },
 
     async delete(request, response) {
@@ -65,8 +70,6 @@ module.exports = {
             .first();
 
         try {
-            
-
             if (incident.ong_id === ong_id) {    
                 const data = await connection('incidents')
                  .where('id', id)
@@ -76,7 +79,7 @@ module.exports = {
                     value
                 });
     
-                return response.status(200).json(data);
+                return response.status(200).json({ message: "Incident succesfully updated!"});
             } else {
                 return response.status(401).json({ error: 'Operation not permitted.' });
             }

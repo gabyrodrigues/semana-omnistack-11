@@ -33,7 +33,11 @@ routes.get('/profile', celebrate({
 }),ProfileController.index);
 
 //cadastro de casos
-routes.post('/incidents', IncidentController.create);
+routes.post('/incidents', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required()
+    }).unknown()
+}), IncidentController.create);
 //listagem de casos
 routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({
@@ -50,7 +54,10 @@ routes.delete('/incidents/:id', celebrate({
 routes.put('/incidents/:id', celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required()
-    })
+    }),
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required()
+    }).unknown()
 }), IncidentController.update);
 
 //procurar caso
