@@ -6,7 +6,9 @@ import logoImg from '../../assets/logo.svg';
 
 import api from '../../services/api';
 
-export default function EditIncident(props) {
+import { Container, Content, Section, Form } from './styles.js';
+
+export default function EditIncident() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [value, setValue] = useState('');
@@ -50,9 +52,9 @@ export default function EditIncident(props) {
     }
 
     return (
-        <div className="new-incident-container">
-            <div className="content">
-                <section>
+        <Container>
+            <Content>
+                <Section>
                     <img src={logoImg} alt="Be the Hero" />
 
                     <h1>Editar caso</h1>
@@ -62,9 +64,9 @@ export default function EditIncident(props) {
                         <FiArrowLeft size={16} color="#E02041" /> 
                         Voltar para home
                     </Link>
-                </section>
+                </Section>
 
-                <form onSubmit={handleEditIncident}>
+                <Form onSubmit={handleEditIncident}>
                     <input 
                         placeholder="Título do caso" 
                         value={title}
@@ -84,8 +86,8 @@ export default function EditIncident(props) {
                     <button className="button" type="submit">
                         Cadastrar
                     </button>
-                </form>
-            </div>
-        </div>
+                </Form>
+            </Content>
+        </Container>
     );
 }

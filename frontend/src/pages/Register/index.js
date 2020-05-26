@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import './styles.css';
+import { Container, Content, Section, Form } from './styles.js';
 
 import api from '../../services/api';
 
@@ -40,9 +40,9 @@ export default function Register() {
     }
 
     return (
-        <div className="register-container">
-            <div className="content">
-                <section>
+        <Container>
+            <Content>
+                <Section>
                     <img src={logoImg} alt="Be the Hero" />
 
                     <h1>Cadastro</h1>
@@ -52,9 +52,9 @@ export default function Register() {
                         <FiArrowLeft size={16} color="#E02041" /> 
                         Voltar para o logon
                     </Link>
-                </section>
+                </Section>
 
-                <form onSubmit={handleRegister}>
+                <Form onSubmit={handleRegister}>
                     <input 
                         placeholder="Nome da ONG" 
                         value={name}
@@ -89,8 +89,8 @@ export default function Register() {
                     <button className="button" type="submit">
                         Cadastrar
                     </button>
-                </form>
-            </div>
-        </div>
+                </Form>
+            </Content>
+        </Container>
     );
 }

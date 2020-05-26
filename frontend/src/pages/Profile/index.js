@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom'; 
-import { FiPower, FiTrash2, FiEdit2 } from 'react-icons/fi';
+import { Link, useHistory } from 'react-router-dom';
+import { FiPower } from 'react-icons/fi'; 
 
 import api from '../../services/api';
 
-import './styles.css';
-
 import logoImg from '../../assets/logo.svg';
+
+import Incident from '../../components/Incident';
+
+import { Container, Header, Title, List } from './styles.js';
 
 export default function Profile() {
     const [incidents, setIncidents] = useState([]);
@@ -28,20 +30,6 @@ export default function Profile() {
         })
     }, [ongId]); //O array de dependencias, toda vez que as informações que estiverem dentro desse array mudarem, a função vai ser executada (se estiver vazio é executado apenas uma vez)
 
-    async function handleDeleteIncident(id) {
-        try {
-            await api.delete(`incidents/${id}`, {
-                headers: {
-                    Authorization: ongId
-                }
-            });
-
-            setIncidents(incidents.filter(incident => incident.id !== id)); //atualiza a lista quando algum caso é deletado
-        } catch (err) {
-            alert('Erro ao deletar caso. Tente novamente.');
-        }
-    }
-
     function handleLogout() {
         localStorage.clear(); //limpa os dados de login armazenados
 
@@ -49,8 +37,8 @@ export default function Profile() {
     }
 
     return (
-        <div className="profile-container">
-            <header>
+        <Container className="profile-container">
+            <Header>
                 <img src={logoImg} alt="Be the Hero" />
                 <span>Bem vindo (a), {ongName}</span>
 
@@ -58,32 +46,15 @@ export default function Profile() {
                 <button onClick={handleLogout}>
                     <FiPower size={18} color="#e02041" />
                 </button>
-            </header>
+            </Header>
 
-            <h1>Casos cadastrados</h1>
+            <Title>Casos cadastrados</Title>
 
-            <ul>
+            <List>
                 {incidents.map(incident => (
-                    <li key={incident.id}>
-                        <strong>CASO:</strong>
-                        <p>{incident.title}</p>
-    
-                        <strong>DESCRIÇÃO:</strong>
-                        <p>{incident.description}</p>
-    
-                        <strong>VALOR:</strong>
-                        <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}</p>
-    
-                        <button onClick={() => handleDeleteIncident(incident.id)} type="button">
-                            <FiTrash2 size={20} color="#a8a8b3" />
-                        </button>
-
-                        <Link className="button-edit" to={{pathname: `/incidents/edit/${incident.id}`,}}>
-                            <FiEdit2 size={20} color="#a8a8b3" />
-                        </Link>
-                    </li>
+                    <Incident id={incident.id} key={incident.id} title={incident.title} description={incident.description} value={incident.value} />
                 ))}
-            </ul>
-        </div>
+            </List>
+        </Container>
     );
 }
