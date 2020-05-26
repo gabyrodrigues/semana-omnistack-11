@@ -74,4 +74,4 @@
 		* **react-native-web**:  ~0.11.7
 
 
-Developed by :blue_heart: by [Gabriely Rodrigues](https://github.com/gaby-rodrigues)
+Developed by [Gabriely Rodrigues](https://github.com/gaby-rodrigues)
