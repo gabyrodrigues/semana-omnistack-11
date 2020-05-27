@@ -5,9 +5,24 @@ export const Container = styled.div`
     max-width: 1180px;
     padding: 0 30px;
     margin: 32px auto;
+
+    @media (max-width: 768px) {
+        padding: 0 25px;
+        max-width: 100%;
+    }
 `;
 
 export const Header = styled.header`
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+`;
+
+export const BlockInfo = styled.div`
     display: flex;
     align-items: center;
 
@@ -19,11 +34,19 @@ export const Header = styled.header`
     img {
         height: 64px;
     }
+`;
+
+export const BlockButton = styled.div`
+    margin-left: auto;
 
     a {
         width: 260px;
-        margin-left: auto;
         margin-top: 0;
+
+        @media (max-width: 768px) {
+            width: 180px;
+            font-size: 16px;
+        }
     }
 
     button {
@@ -34,16 +57,25 @@ export const Header = styled.header`
         background-color: transparent;
         margin-left: 16px;
         transition: border-color 0.2s;
+
+        &:hover {
+            border-color: #999;
+        }
     }
 
-    &:hover {
-        border-color: #999;
+    @media (max-width: 768px) {
+        margin-left: 0;
+        margin-top: 20px;
     }
 `;
 
 export const Title = styled.h1`
     margin-top: 80px;
-        margin-bottom: 24px;
+    margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+        margin-top: 50px;
+    }
 `;
 
 export const List = styled.ul`
@@ -51,4 +83,8 @@ export const List = styled.ul`
     grid-template-columns: 1fr 1fr;
     grid-gap: 24px;
     list-style: none;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `;

@@ -9,7 +9,7 @@ import logoImg from '../../assets/logo.svg';
 
 import Incident from '../../components/Incident';
 
-import { Container, Header, Title, List } from './styles.js';
+import { BlockButton, BlockInfo, Container, Header, Title, List } from './styles.js';
 
 export default function Profile() {
     const [incidents, setIncidents] = useState([]);
@@ -56,13 +56,17 @@ export default function Profile() {
     return (
         <Container className="profile-container">
             <Header>
-                <img src={logoImg} alt="Be the Hero" />
-                <span>Bem vindo (a), {ongName}</span>
+                <BlockInfo>
+                    <img src={logoImg} alt="Be the Hero" />
+                    <span>Bem vindo (a), {ongName}</span>
+                </BlockInfo>
 
-                <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
-                <button onClick={handleLogout}>
-                    <FiPower size={18} color="#e02041" />
-                </button>
+                <BlockButton>
+                    <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
+                    <button onClick={handleLogout}>
+                        <FiPower size={18} color="#e02041" />
+                    </button>
+                </BlockButton>
             </Header>
 
             <Title>Casos cadastrados</Title>

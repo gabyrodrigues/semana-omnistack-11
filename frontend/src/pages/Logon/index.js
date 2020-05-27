@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 
-import { Container, SectionForm, Form } from './styles.js';
+import { Background, Container, Form, SectionForm } from './styles.js';
 
 import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
@@ -53,7 +53,7 @@ export default function Logon() {
 
             </SectionForm>
 
-            <img src={heroesImg} alt="Heroes" />
+            <Background src={heroesImg} alt="Heroes" />
         </Container>
     );
 }

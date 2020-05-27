@@ -21,6 +21,11 @@ export const Content = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 25px;
+    }
 `;
 
 export const Section = styled.section`
@@ -37,6 +42,10 @@ export const Section = styled.section`
         color: #737380;
         line-height: 32px;
     }
+
+    @media (max-width: 768px) {
+        max-width: 100%;
+    }
 `;
 
 export const Form = styled.form`
@@ -45,5 +54,9 @@ export const Form = styled.form`
 
     input, textarea {
         margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+        max-width: 100%;
     }
 `;
