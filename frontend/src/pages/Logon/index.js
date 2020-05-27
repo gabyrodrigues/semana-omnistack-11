@@ -8,6 +8,7 @@ import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
 
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 export default function Logon() {
     const [id, setId] = useState('');
@@ -25,7 +26,7 @@ export default function Logon() {
 
             history.push('/profile');
         } catch (err) {
-            alert('Falha no login. Tente novamente.');
+            toast.error("Falha no login. Verifique se o id inserido está correto e tente novamente.");
         }
     }
 

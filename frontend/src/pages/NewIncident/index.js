@@ -7,6 +7,7 @@ import { Container, Content, Section, Form } from './styles.js';
 import logoImg from '../../assets/logo.svg';
 
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 export default function NewIncident() {
     const [title, setTitle] = useState('');
@@ -35,7 +36,7 @@ export default function NewIncident() {
 
             history.push('/profile');
         } catch (err) {
-            alert("Erro ao cadastrar caso. Tente novamente.");
+            toast.error("Erro ao cadastrar caso. Verifique os dados inseridos e tente novamente.");
         }
     }
 
@@ -66,6 +67,7 @@ export default function NewIncident() {
                         onChange={e => setDescription(e.target.value)}
                     />
                     <input 
+                        type="number"
                         placeholder="Valor em reais" 
                         value={value}
                         onChange={e => setValue(e.target.value)}

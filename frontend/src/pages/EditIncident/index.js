@@ -5,6 +5,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import logoImg from '../../assets/logo.svg';
 
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 import { Container, Content, Section, Form } from './styles.js';
 
@@ -23,7 +24,6 @@ export default function EditIncident() {
             setTitle(response.data.incident[0].title);
             setDescription(response.data.incident[0].description);
             setValue(response.data.incident[0].value);
-            console.log(response);
         }); 
     }, [id]);
 
@@ -47,7 +47,7 @@ export default function EditIncident() {
 
             history.push('/profile');
         } catch (err) {
-            alert("Erro ao editar caso. Tente novamente.");
+            toast.error("Erro ao editar caso. Verifique os dados inseridos e tente novamente.");
         }
     }
 
@@ -78,7 +78,9 @@ export default function EditIncident() {
                         onChange={e => setDescription(e.target.value)}
                     />
                     <input 
+                        type="number"
                         placeholder="Valor em reais" 
+                        // pattern="^\s*(?:[1-9]\d{0,2}(?:\.\d{3})*|0)(?:,\d{1,2})?$"
                         value={value}
                         onChange={e => setValue(e.target.value)}
                     />

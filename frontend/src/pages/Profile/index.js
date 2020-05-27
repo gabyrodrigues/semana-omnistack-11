@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi'; 
 
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -17,6 +18,22 @@ export default function Profile() {
     const ongName = localStorage.getItem('ongName'); //busca o nome armazenado no localStorage no momento do login
 
     const history = useHistory();
+
+    async function handleDeleteIncident(id) {
+        try {
+            await api.delete(`incidents/${id}`, {
+                headers: {
+                    Authorization: ongId
+                }
+            }); 
+
+            setIncidents(incidents.filter(incident => incident.id !== id)); //atualiza a lista quando algum caso é deletado
+            
+            toast.success("Caso deletado com sucesso.");
+        } catch (err) {
+            toast.error("Erro ao deletar caso. Tente novamente.");
+        }
+    }
 
     //primeiro parametro: qual função que vai ser executada
     //segundo parametro: quando essa função vai ser executada. 
@@ -52,7 +69,14 @@ export default function Profile() {
 
             <List>
                 {incidents.map(incident => (
-                    <Incident id={incident.id} key={incident.id} title={incident.title} description={incident.description} value={incident.value} />
+                    <Incident 
+                     id={incident.id} 
+                     key={incident.id} 
+                     handleDeleteIncident={() => handleDeleteIncident(incident.id)}
+                     title={incident.title} 
+                     description={incident.description} 
+                     value={incident.value} 
+                    />
                 ))}
             </List>
         </Container>

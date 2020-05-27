@@ -5,6 +5,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { Container, Content, Section, Form } from './styles.js';
 
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -31,11 +32,11 @@ export default function Register() {
         try {
             const response = await api.post('ongs', data); //conexão com o backend para o cadastro enviando os dados através da variável data, ele pega a resposta (id da ong) esperando o cadastro finalizar (await/async)
 
-            alert(`Seu id de acesso: ${response.data.id}`);
+            toast.info(`Seu id de acesso: ${response.data.id}`);
 
             history.push('/'); //envia pra rota raiz depois do cadastro
         } catch (err) {
-            alert("Erro no cadastro, tente novamente");
+            toast.error("Falha no cadastro. Verifique seus dados e tente novamente.");
         }
     }
 

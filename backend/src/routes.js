@@ -34,6 +34,11 @@ routes.get('/profile', celebrate({
 
 //cadastro de casos
 routes.post('/incidents', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        title: Joi.string().required(),
+        description: Joi.string().required(),
+        value: Joi.number().required()
+    }),
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required()
     }).unknown()
