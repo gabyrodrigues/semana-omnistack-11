@@ -40,5 +40,36 @@ module.exports = {
         });
 
         return response.json({ id });
-    }
+    },
+
+    async update(request, response) {
+        const { id } = request.params;
+        const { name, email, whatsapp, city, uf } = request.body;
+        const authorization_id = request.headers.authorization;
+
+        const ong_id = await connection('ongs')
+         .where('id', id)
+         .select('id')
+         .first();
+        
+        try {
+            if(ong_id.id === authorization_id) {
+                await connection('ongs')
+                 .where('id', id)
+                 .update({
+                    name,
+                    email,
+                    whatsapp,
+                    city,
+                    uf
+                 });
+
+                return response.status(200).json({ message: 'Updated succesfully.' });
+            } else {
+                return response.status(401).json({ error: 'Operation not permitted.' });
+            }
+        } catch (error) {
+            return response.status(500).json({ error: error });
+        }
+    },
 }
