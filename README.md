@@ -20,6 +20,11 @@
 2. When the user is logged, he is now redirected to the profile page if he tries to access login/register pages
 3. When the user is not logged he cannot access profile nor incidents create/edit pages
 4. We're now using on the web version styled-components
+5. The NGOs now can update their registered informations
+6. It's possible for the NGOs to delete their own accounts
+7. When the user search for a invalid url on the web version, he is redirected to a not found page
+8. For prevention, it was created a verification for the NGO id to not be duplicated on registration
+9. Now we're using toast notifications for alerts and messages
 
 ## :computer: Languages
 
