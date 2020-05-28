@@ -95,5 +95,19 @@ module.exports = {
         } catch (error) {
             return response.status(500).json({ error: error });
         }
+    },
+
+    async search(request, response) {
+        const { id } = request.params;
+
+        try {	
+            const ong = await connection('ongs')
+            .select(['ongs.*'])
+            .where('ongs.id', id);
+    
+            response.status(200).json({ong});
+        } catch (error) {
+            response.status(500).json({ error: error });
+        }
     }
 }

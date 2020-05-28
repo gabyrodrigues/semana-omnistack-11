@@ -44,6 +44,8 @@ routes.delete('/ongs/:id', celebrate({
         authorization: Joi.string().required()
     }).unknown()
 }), OngController.delete);
+//buscar ong
+routes.get('/ongs/:id', OngController.search);
 
 //listagem de casos especificos da ong
 routes.get('/profile', celebrate({

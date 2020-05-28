@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiPower } from 'react-icons/fi'; 
+import { FiPower, FiSettings } from 'react-icons/fi'; 
 
 import api from '../../services/api';
 import { toast } from 'react-toastify';
@@ -63,6 +63,9 @@ export default function Profile() {
 
                 <BlockButton>
                     <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
+                    <Link className="edit-button" to="ongs/edit">
+                        <FiSettings size={18} color="#e02041" />
+                    </Link>
                     <button onClick={handleLogout}>
                         <FiPower size={18} color="#e02041" />
                     </button>

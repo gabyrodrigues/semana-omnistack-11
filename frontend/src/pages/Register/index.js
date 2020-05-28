@@ -71,7 +71,7 @@ export default function Register() {
                         placeholder="Whatsapp" 
                         value={whatsapp}
                         onChange={e => setWhatsapp(e.target.value)}
-                        maxlength="15"
+                        maxLength="15"
                     />
 
                     <div className="input-group">

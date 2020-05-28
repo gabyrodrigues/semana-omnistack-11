@@ -38,6 +38,7 @@ export const BlockInfo = styled.div`
 
 export const BlockButton = styled.div`
     margin-left: auto;
+    display: flex;
 
     a {
         width: 260px;
@@ -49,7 +50,7 @@ export const BlockButton = styled.div`
         }
     }
 
-    button {
+    button, .edit-button {
         height: 60px;
         width: 60px;
         border-radius: 4px;
@@ -61,6 +62,10 @@ export const BlockButton = styled.div`
         &:hover {
             border-color: #999;
         }
+    }
+
+    .edit-button {
+        padding: 21px 20px;
     }
 
     @media (max-width: 768px) {
