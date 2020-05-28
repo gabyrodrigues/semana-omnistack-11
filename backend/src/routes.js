@@ -38,6 +38,12 @@ routes.put('/ongs/:id', celebrate({
         uf: Joi.string().required().length(2)
     })
 }), OngController.update);
+//deletar ong
+routes.delete('/ongs/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required()
+    }).unknown()
+}), OngController.delete);
 
 //listagem de casos especificos da ong
 routes.get('/profile', celebrate({
